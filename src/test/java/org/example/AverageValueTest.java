@@ -3,21 +3,24 @@ package org.example;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 class AverageValueTest {
-    private ListNumbers listNumbers;
+    private ListNumbers listNumbers = Mockito.mock(ListNumbers.class);
     private final PrintStream out = System.out;
     private ByteArrayOutputStream byteArrayOutputStream;
 
     @BeforeEach
     void setUp() {
-        listNumbers = new ListNumbers(List.of(1, 2, 3));
+//        listNumbers = new ListNumbers(List.of(1, 2, 3));
+        when(listNumbers.getNumbers()).thenReturn(List.of(1, 2, 3));
         byteArrayOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(byteArrayOutputStream));
         assertInstanceOf(AverageValue.class, new AverageValue());
